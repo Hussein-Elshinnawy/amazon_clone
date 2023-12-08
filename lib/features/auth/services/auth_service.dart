@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:amazon_clone/common/widget/bottom_bar.dart';
 import 'package:amazon_clone/constants/utils.dart';
 import 'package:amazon_clone/constants/variables.dart';
 import 'package:amazon_clone/features/home/screens/home_screen.dart';
@@ -76,7 +77,7 @@ class AuthService {
           Navigator.pushNamedAndRemoveUntil(
             //after naviagting it removes the previous route paths
             context,
-            HomeScreen.routeName,
+            BottomBar.routeName,
             (route) => false,
           );
         },
@@ -107,7 +108,6 @@ class AuthService {
 
       var response = jsonDecode(tokenRes.body);
       var habal = jsonDecode(tokenRes.body).toString();
-
       if (response == true) {
         http.Response userResponse = await http.get(
           Uri.parse('$url/'),
