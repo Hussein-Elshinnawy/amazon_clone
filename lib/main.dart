@@ -1,4 +1,4 @@
-
+import 'package:amazon_clone/features/admin/screens/admin_screen.dart';
 import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
 import 'package:amazon_clone/features/auth/services/auth_service.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
@@ -6,10 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:amazon_clone/constants/variables.dart';
 import 'package:amazon_clone/router.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'common/widget/bottom_bar.dart';
 
-void main() {
+Future<void> main() async{
+  await dotenv.load();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
       create: (context) => UserProvider(),
@@ -32,9 +33,11 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     authService.getUserData(context: context);
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Amazon clone',
       theme: ThemeData(
         scaffoldBackgroundColor: Variables.backgroundColor,
@@ -47,7 +50,11 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: Provider.of<UserProvider>(context).user.token.isNotEmpty? const BottomBar() : const AuthScreen(),
+      home: Provider.of<UserProvider>(context).user.token.isNotEmpty
+          ? Provider.of<UserProvider>(context).user.type == 'user'
+              ? const BottomBar()
+              : const AdminScreen()
+          : const AuthScreen(),
     );
   }
 }

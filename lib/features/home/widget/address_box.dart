@@ -45,7 +45,10 @@ class AddressBox extends StatelessWidget {
                 left: 5,
                 top: 2,
               ),
-              child: Icon(Icons.arrow_drop_down_outlined, size: 18,),
+              child: Icon(
+                Icons.arrow_drop_down_outlined,
+                size: 18,
+              ),
             ),
           ],
         ),

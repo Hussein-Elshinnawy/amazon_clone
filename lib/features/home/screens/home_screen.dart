@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60),
+        preferredSize: const Size.fromHeight(60),//default height
         child: AppBar(
           flexibleSpace: Container(
             decoration: const BoxDecoration(gradient: Variables.appBarGradient),
@@ -36,9 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     elevation: 1,
                     child: TextFormField(
                       decoration: InputDecoration(
-                          prefixIcon: InkWell(
-                            // what does this do
-                            onTap: () {},
+                          prefixIcon: InkWell(// what does this do
+                            onTap: () {
+
+                            },
                             child: const Padding(
                               padding: EdgeInsets.only(left: 6),
                               child: Icon(
