@@ -107,7 +107,6 @@ class AuthService {
       );
 
       var response = jsonDecode(tokenRes.body);
-      var habal = jsonDecode(tokenRes.body).toString();
       if (response == true) {
         http.Response userResponse = await http.get(
           Uri.parse('$url/'),

@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:amazon_clone/models/user.dart';
 
 class UserProvider extends ChangeNotifier {
-  User _user = User(// Initialize a default user object with empty values
-  id: '',
+  User _user = User(
+      // Initialize a default user object with empty values
+      id: '',
       name: '',
       email: '',
       password: '',
@@ -12,9 +13,8 @@ class UserProvider extends ChangeNotifier {
       token: '');
   User get user => _user;
 
-  void setUser(String user){
-    _user= User.fromJson(user); // Set the user data from the provided JSON
-    notifyListeners();// Notify the listeners (UI) that the user data has changed
+  void setUser(String user) {
+    _user = User.fromJson(user); // Set the user data from the provided JSON
+    notifyListeners(); // Notify the listeners (UI) that the user data has changed
   }
-
 }

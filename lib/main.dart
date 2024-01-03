@@ -9,13 +9,18 @@ import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'common/widget/bottom_bar.dart';
 
-Future<void> main() async{
-  await dotenv.load();
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-      create: (context) => UserProvider(),
-    )
-  ], child: const MyApp()));
+Future<void> main() async {
+  await dotenv.load(); //load the private variable saved  in .env to prevent publish on github
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => UserProvider(),
+        )
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {

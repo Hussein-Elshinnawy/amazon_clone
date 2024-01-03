@@ -7,8 +7,7 @@ import 'package:http/http.dart' as http;
 void httpErrorHandle({
   required http.Response response,
   required BuildContext context, // to display the snack bar??????
-  required VoidCallback
-      onSuccess, // function()? i think it's just define empty function
+  required VoidCallback onSuccess, // function()? i think it's just define empty function
 }) {
   switch (response.statusCode) {
     case 200:
