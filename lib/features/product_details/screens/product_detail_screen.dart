@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:amazon_clone/common/widget/custom_button.dart';
+import 'package:amazon_clone/constants/utils.dart';
 import 'package:amazon_clone/features/product_details/services/product_detail_service.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -53,6 +54,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
     void navigateToSearchScreen(String query) {
       Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+    }
+    void addToCart(){
+      productDetailService.addToCart(context: context, product: widget.product);
     }
 
     return Scaffold(
@@ -204,6 +208,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               child: CustomButtton(
                 text: 'Buy Now',
                 onTap: () {},
+                color: Variables.secondaryColor,
               ),
             ),
             const SizedBox(
@@ -213,7 +218,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               padding: const EdgeInsets.all(8.0),
               child: CustomButtton(
                 text: 'Add to cart',
-                onTap: () {},
+                onTap: () async {
+                  // addToCart;
+                  productDetailService.addToCart(context: context, product: widget.product);
+                  showSnackBar(context, 'added to cart');
+                },
                 color: const Color.fromRGBO(254, 216, 19, 1),
               ),
             ),

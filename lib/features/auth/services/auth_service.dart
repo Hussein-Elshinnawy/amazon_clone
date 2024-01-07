@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:amazon_clone/common/widget/bottom_bar.dart';
 import 'package:amazon_clone/constants/utils.dart';
@@ -19,15 +20,18 @@ class AuthService {
       required String email,
       required String password,
       required String name}) async {
+   
     try {
       User user = User(
-          id: '',
-          name: name,
-          email: email,
-          password: password,
-          address: '',
-          type: '',
-          token: '');
+        id: '',
+        name: name,
+        email: email,
+        password: password,
+        address: '',
+        type: '',
+        token: '',
+        cart: [],
+      );
 
       http.Response res = await http.post(Uri.parse('$url/api/signup'),
           body: user.toJson(),
@@ -88,10 +92,11 @@ class AuthService {
   }
 
   void getUserData({
-     BuildContext? context,
+    BuildContext? context,
   }) async {
     try {
-      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
       String? token = sharedPreferences.getString('x-auth-token');
       if (token == null) {
         sharedPreferences.setString('x-auth-token', '');
@@ -118,7 +123,6 @@ class AuthService {
         );
         var userProvider = Provider.of<UserProvider>(context!, listen: false);
         userProvider.setUser(userResponse.body);
-
       }
     } catch (e) {
       showSnackBar(context!, e.toString());
