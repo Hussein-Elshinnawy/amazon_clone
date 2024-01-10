@@ -1,3 +1,4 @@
+import 'package:amazon_clone/features/cart/services/cart_service.dart';
 import 'package:amazon_clone/features/product_details/services/product_detail_service.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,8 +21,12 @@ class CartProduct extends StatefulWidget {
 
 class _CartProductState extends State<CartProduct> {
   final ProductDetailService productDetailService= ProductDetailService();
+  final CartService cartService= CartService();
   void increaseQuantity(Product product){
     productDetailService.addToCart(context: context, product: product,);
+  }
+  void decreseQuantity(Product product){
+    cartService.removeFromCart(context: context, product: product,);
   }
   @override
   Widget build(BuildContext context) {
@@ -99,13 +104,16 @@ class _CartProductState extends State<CartProduct> {
                 ),
                 child: Row(
                   children: [
-                    Container(
-                      width: 35,
-                      height: 32,
-                      alignment: Alignment.center,
-                      child: Icon(
-                        Icons.remove,
-                        size: 18,
+                    InkWell(
+                      onTap:()=>decreseQuantity(product),
+                      child: Container(
+                        width: 35,
+                        height: 32,
+                        alignment: Alignment.center,
+                        child: Icon(
+                          Icons.remove,
+                          size: 18,
+                        ),
                       ),
                     ),
                     DecoratedBox(
