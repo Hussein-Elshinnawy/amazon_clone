@@ -1,10 +1,8 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:amazon_clone/common/widget/bottom_bar.dart';
 import 'package:amazon_clone/constants/utils.dart';
 import 'package:amazon_clone/constants/variables.dart';
-import 'package:amazon_clone/features/home/screens/home_screen.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';

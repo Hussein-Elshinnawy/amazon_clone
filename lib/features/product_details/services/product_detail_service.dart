@@ -8,10 +8,6 @@ import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:logger/logger.dart';
-import 'package:logger/logger.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
 
 import '../../../models/user.dart';
 

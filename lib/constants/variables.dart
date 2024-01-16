@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 String API_URL= dotenv.env['API_URL']!;
 String url=API_URL;
 class Variables {

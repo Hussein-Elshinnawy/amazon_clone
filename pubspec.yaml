@@ -47,6 +47,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   logger: ^2.0.2+1
   path_provider: ^2.1.1
+  pay: ^1.1.2
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +74,8 @@ flutter:
   assets:
     - assets/images/
     - .env
+    - assets/applepay.json
+    - assets/gpay.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:
