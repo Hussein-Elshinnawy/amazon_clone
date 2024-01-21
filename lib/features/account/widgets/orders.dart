@@ -1,37 +1,50 @@
 
+import 'package:amazon_clone/common/widget/single_product.dart';
+import 'package:amazon_clone/features/account/services/account_service.dart';
 import 'package:amazon_clone/features/account/widgets/product.dart';
 import 'package:flutter/material.dart';
 
+import '../../../common/widget/loader.dart';
 import '../../../constants/variables.dart';
+import '../../../models/order.dart';
 
 class Orders extends StatefulWidget {
-  const Orders({super.key});
+  const Orders({Key? key}) : super(key: key);
 
   @override
   State<Orders> createState() => _OrdersState();
 }
 
 class _OrdersState extends State<Orders> {
+  List<Order>? orders;
+  final AccountServices accountServices = AccountServices();
 
-  List<String> list=[
+  @override
+  void initState() {
+    super.initState();
+    fetchOrders();
+  }
 
-      'https://strawberryplants.org/wp-content/uploads/site-icon-1.png',
-      'https://strawberryplants.org/wp-content/uploads/site-icon-1.png',
-      'https://strawberryplants.org/wp-content/uploads/site-icon-1.png',
-      'https://strawberryplants.org/wp-content/uploads/site-icon-1.png',
-  ];
+  void fetchOrders() async {
+    orders = await accountServices.fetchMyOrders(context: context);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return orders == null
+        ? const Loader()
+        : Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              padding: const EdgeInsets.only(left: 15),
+              padding: const EdgeInsets.only(
+                left: 15,
+              ),
               child: const Text(
-                'your orders',
+                'Your Orders',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -39,9 +52,11 @@ class _OrdersState extends State<Orders> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.only(right: 15),
-              child: const Text(
-                'see all',
+              padding: const EdgeInsets.only(
+                right: 15,
+              ),
+              child: Text(
+                'See all',
                 style: TextStyle(
                   color: Variables.selectedNavBarColor,
                 ),
@@ -49,14 +64,21 @@ class _OrdersState extends State<Orders> {
             ),
           ],
         ),
+        // display orders
         Container(
           height: 170,
-          padding: const EdgeInsets.only(left: 10, right: 0, top: 20),
+          padding: const EdgeInsets.only(
+            left: 10,
+            top: 20,
+            right: 0,
+          ),
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: list.length,
+            itemCount: orders!.length,
             itemBuilder: (context, index) {
-              return Product(image: list[index]);
+              return SingleProduct(
+                  image: orders![index].products[0].images[0],
+              );
             },
           ),
         ),

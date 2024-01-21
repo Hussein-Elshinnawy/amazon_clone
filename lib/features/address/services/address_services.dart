@@ -14,7 +14,7 @@ import 'package:amazon_clone/models/product.dart';
 class AddressServices {
   void saveUserAddress({
     required BuildContext context,
-    required String address;
+    required String address,
   }) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
@@ -44,33 +44,26 @@ class AddressServices {
     }
   }
 
-  Future<List<Product>> fetchAllProducts(BuildContext context) async {
+  void placeOrder({required BuildContext context, required String address, required double totalSum,}) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    List<Product> productList = [];
     try {
       http.Response response =
-      await http.get(Uri.parse('$url/admin/get-all-products'), headers: {
+      await http.post(Uri.parse('$url/api/order'), headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'x-auth-token': userProvider.user.token,
-      });
+      },body: jsonEncode({'cart':userProvider.user.cart, 'address':address, 'totalPrice':totalSum}));
       httpErrorHandle(
           response: response,
           context: context,
           onSuccess: () {
-            for (int i = 0; i < jsonDecode(response.body).length; i++) {
-              productList.add(
-                Product.fromJson(
-                  jsonEncode(
-                    jsonDecode(response.body)[i],
-                  ),
-                ),
-              );
-            }
-          });
+            showSnackBar(context, 'your order has been placed');
+            User user= userProvider.user.copyWith(cart: [],);
+            userProvider.setUserFromModel(user);
+            },
+          );
     } catch (e) {
       showSnackBar(context, e.toString());
     }
-    return productList;
   }
 
   void deleteProduct(
