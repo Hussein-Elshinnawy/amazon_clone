@@ -112,6 +112,7 @@ class _AuthScreenState extends State<AuthScreen> {
                               signUpUser();
                             }
                           },
+                          color: Variables.secondaryColor,
                         ),
                       ],
                     ),
@@ -125,6 +126,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 title: const Text(
                   'sign-in',
                   style: TextStyle(fontWeight: FontWeight.bold),
+
                 ),
                 leading: Radio(
                   value: Auth.signin,
@@ -161,6 +163,7 @@ class _AuthScreenState extends State<AuthScreen> {
                               signInUser();
                             }
                           },
+                          color: Variables.secondaryColor,
                         ),
                       ],
                     ),

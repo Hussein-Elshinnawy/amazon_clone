@@ -178,7 +178,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 SizedBox(
                   height: 10,
                 ),
-                CustomButtton(text: 'sell', onTap: sellProduct),
+                CustomButtton(text: 'sell', onTap: sellProduct, color: Variables.secondaryColor,),
               ],
             ),
           ),

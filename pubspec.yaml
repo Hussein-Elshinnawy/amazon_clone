@@ -48,6 +48,9 @@ dependencies:
   logger: ^2.0.2+1
   path_provider: ^2.1.1
   pay: ^1.1.2
+  intl: ^0.18.1
+  fl_chart: ^0.66.1
+
 
 dev_dependencies:
   flutter_test:
