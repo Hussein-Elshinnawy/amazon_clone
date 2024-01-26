@@ -72,8 +72,7 @@ class AuthService {
         context: context,
         onSuccess: () async {
           SharedPreferences pref = await SharedPreferences.getInstance();
-          Provider.of<UserProvider>(context, listen: false)
-              .setUser(res.body); // to save the data
+          Provider.of<UserProvider>(context, listen: false).setUser(res.body); // to save the data
           pref.setString('x-auth-token',
               jsonDecode(res.body)['token']); // x-auth-token = res.body's token
           Navigator.pushNamedAndRemoveUntil(

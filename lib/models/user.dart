@@ -21,7 +21,7 @@ class User {
     required this.cart,
   });
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMap() { // return a map of String, dynamic ex => 'name': "hussein"
     return {
       'id': id,
       'name': name,
@@ -34,19 +34,18 @@ class User {
     };
   }
 
-  //this maps with the json body
+  //this create a new instant of user from Map<String, dynamic>
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      id: map['_id'] ?? '',
+      id: map['_id'] ?? '', // ?? is null-aware operator which returns the left-hand operand if it's not null otherwise the right-hand operand
       name: map['name'] ?? '',
       email: map['email'] ?? '',
       password: map['password'] ?? '',
       address: map['address'] ?? '',
       type: map['type'] ?? '',
       token: map['token'] ?? '',
-      cart: List<Map<String, dynamic>>.from(
-        map['cart']?.map(
-          (x) => Map<String, dynamic>.from(x),
+      cart: List<Map<String, dynamic>>.from(//This part converts the resulting iterable of Map<String, dynamic> objects into a list of the same type
+        map['cart']?.map((x) => Map<String, dynamic>.from(x), // map method on the cart property of the map. The ?. operator is the null-aware access, which only calls map if map['cart'] is not null For each element x in the cart list, it converts it to a Map<String, dynamic> using the from constructor
         ),
       ),
     );
@@ -56,6 +55,9 @@ class User {
   // Factory method to create a user object from JSON
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
 
+
+  //because in dart strings and numbers are immutable values cannot be changed after they are created
+  //he copyWith method allows you to create a new User object with updated properties without modifying the original object.
   User copyWith({
     String? id,
     String? name,
